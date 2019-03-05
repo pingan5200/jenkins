@@ -36,7 +36,9 @@ role=LNMP,MYSQL
 详情见one_job  
 ![image](https://github.com/pingan5200/jenkins/blob/master/one-job2.png)  
 ### 5. 白盒测试lnmp环境是否搭建成功
-start_lnmp任务执行完开始阻塞，执行下游Python_QA_TEST任务,下游任务执行成功，上游才释放结果成功  
+5.1 python脚本检查lnmp环境  
+代码详情见python_qa.py  
+5.2 start_lnmp任务执行完开始阻塞，执行下游Python_QA_TEST任务,下游任务执行成功，上游才释放结果成功  
 ![image](https://github.com/pingan5200/jenkins/blob/master/build_check.png)  
 
 
