@@ -3,10 +3,10 @@
 ### 1. 服务器ip及域名  
 jenkins-server: 192.168.92.10  server10.example.com  
 gitlab-server: 192.168.92.134  gitlab.example.com  
-server: 192.168.92.11  server11.example.com   
-server: 192.168.92.12  server12.example.com   
-server: 192.168.92.13  server13.example.com  
-server: 192.168.92.14  server14.example.com   
+stage-server: 192.168.92.11  server11.example.com   
+production-server: 192.168.92.12  server12.example.com   
+production-server: 192.168.92.13  server13.example.com  
+production-server: 192.168.92.14  server14.example.com   
 ### 2. 所有服务器/etc/hosts环境  
 vim /etc/hosts  
 192.168.92.10  server10.example.com  server10  
