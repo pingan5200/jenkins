@@ -25,7 +25,16 @@ vim /etc/hosts
 3.4 php仓库： php开源站点包  
 ![image](https://github.com/pingan5200/jenkins/blob/master/php.png)  
 ### 4. 在jenkins上构建第一个任务部署lnmp  
-![image](https://github.com/pingan5200/jenkins/blob/master/one-job.png) 
+4.1 动态参数构建需编辑文件，添加host和role
+[root@server10 ~]# vim /var/lib/jenkins/workspace/start_lnmp/host.list 
+host=server10,server11,server12,server13
+role=LNMP,MYSQL
+4.2 开始构建  
+4.2.1 动态参数化构建  
+![image](https://github.com/pingan5200/jenkins/blob/master/one-job.png)  
+4.2.2 用执行shell脚本  
+详情见one_job  
+
 
 
 
