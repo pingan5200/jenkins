@@ -17,9 +17,13 @@ vim /etc/hosts
 192.168.92.134 gitlab.example.com  
 3. 构建gitlab仓库，构建4个仓库存放的分别为  
 lnmp仓库：nginx安装包，php-fpm安装包  
+![image](https://github.com/pingan5200/jenkins/blob/master/lnmp.png)  
 puppet仓库: puppet客户端配置文件  
-pupppet-server仓库: puppet服务端配置文件及传给客户端的nginx配置文件  
+![image](https://github.com/pingan5200/jenkins/blob/master/puppet.png)  
+pupppet-server仓库: puppet服务端配置文件及传给客户端的nginx配置文件 
+![image](https://github.com/pingan5200/jenkins/blob/master/puppet-server.png)  
 php仓库： php开源站点包  
-![image](https://github.com/pingan5200/jenkins/blob/master/repo.png)  
+![image](https://github.com/pingan5200/jenkins/blob/master/php.png)  
+
 
 
