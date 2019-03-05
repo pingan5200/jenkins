@@ -1,13 +1,13 @@
 ####################################  RUN LNMP BUILD ####################################
-sudo ssh $RUN_SERVER "hostname;yum -y install git ||:;yum install epel-release -y ||:;mkdir /root/down 2> /dev/null ||:"
+sudo ssh $RUN_SERVER "hostname;rpm -qa |grep git- || yum -y install git ||:;rpm -qa |grep epel || yum install epel-release -y ||:;mkdir /root/down 2> /dev/null ||:"
 sudo ssh $RUN_SERVER "ls -1 /root/down/lnmp/ && (git -c http.sslVerify=false --git-dir=/root/down/lnmp/.git pull; sh /root/down/lnmp/lnmp.sh) || (git -c http.sslVerify=false clone  https://dev:123456789@gitlab.example.com/root/lnmp.git /root/down/lnmp; sh /root/down/lnmp/lnmp.sh)"
 #################################   DEPLOY  PHP  ##################
 sudo ssh "$RUN_SERVER" "ls -1 /usr/local/nginx/html/php &&  git -c http.sslVerify=false --git-dir=/usr/local/nginx/html/php/.git  pull || git -c http.sslVerify=false clone  https://dev:123456789@gitlab.example.com/root/php.git /usr/local/nginx/html/php"
 #################################   PREPARE PUPPET AGENT ################################
-sudo ssh "$RUN_SERVER" "yum -y install puppet ||:; ls -1 /root/down/puppet &&  git -c http.sslVerify=false --git-dir=/root/down/puppet/.git  pull ||  git -c http.sslVerify=false clone  https://dev:123456789@gitlab.example.com/root/puppet.git /root/down/puppet"
+sudo ssh "$RUN_SERVER" "rpm -qa |grep puppet || yum -y install puppet ||:; ls -1 /root/down/puppet &&  git -c http.sslVerify=false --git-dir=/root/down/puppet/.git  pull ||  git -c http.sslVerify=false clone  https://dev:123456789@gitlab.example.com/root/puppet.git /root/down/puppet"
 sudo ssh "$RUN_SERVER" "cp /root/down/puppet/puppet.conf  /etc/puppet/ && sed -i \"s/server15.example.com/\"$RUN_SERVER\".example.com/g\" /etc/puppet/puppet.conf"
 ######  PUPPET AGENT CERT Assign #####
-sudo yum -y install puppet-server ||:;
+sudo rpm -qa |grep puppet-server || sudo yum -y install puppet-server ||:;
 sudo ls -1 /root/down/puppet-server && sudo git -c http.sslVerify=false --git-dir=/root/down/puppet-server/.git  pull || sudo git -c http.sslVerify=false clone https://dev:123456789@gitlab.example.com/root/puppet-server.git  /root/down/puppet-server
 sudo \cp -rf /root/down/puppet-server/  /etc/puppet/
 sudo systemctl restart puppetmaster
