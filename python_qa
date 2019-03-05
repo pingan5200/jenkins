@@ -1,0 +1,96 @@
+#!/usr/local/bin/python3
+
+import os
+
+def remote_check(hostname):
+    str1=hostname
+    print(str1)
+    cmd_line="sudo ssh" + ' ' + str1 + ' ' + "netstat -tnlp"
+    print("run cmd is :" , cmd_line)
+    cmd_re=os.popen(cmd_line).readlines()
+    if 'nginx' in str(cmd_re):
+        print ("NGINX IS RUNNING")
+    else:
+        print ("NGINX RETURN IN NOT RUNNING!!!!")
+        os._exit(1)
+    if 'php-fpm' in str(cmd_re):
+        print("PHP IS RUNNING")
+    else:
+        print ("PHP RETURN IN NOT RUNNING!!!!")
+        os._exit(2)
+    if 'mysqld' in str(cmd_re):
+        print ("MYSQL IS RUNNING")
+    else:
+        print ("MYSQL RETURN IN NOT RUNNING!!!!")
+        os._exit(3)
+
+def remote_check_php(hostname):
+    str1="sudo ssh" + ' ' +  hostname
+    print(str1)
+    cmd_line=str1 + ' ' +  "curl -q http://127.0.0.1/php/index.php  | grep -i  'php version 5.4'"
+    print ("run cmd is :" , cmd_line)
+    cmd_re_1=os.popen(cmd_line).readlines()
+    print(cmd_re_1)
+    if 'PHP Version 5.4' in str(cmd_re_1):
+        print("PHP index.php IS FUNCTIONNING")
+    else:
+        print("PHP index.php IS NOT OK!!!!")
+        os._exit(4)
+
+def remote_check_web(hostname):
+    str1="sudo ssh" + ' ' +  hostname
+    print(str1)
+    cmd_line=str1 + ' ' +  "curl -q -I http://127.0.0.1/php/app/web.php  | grep 'HTTP/1.1 200 OK'"
+    print("run cmd is :" , cmd_line)
+    cmd_re_1=os.popen(cmd_line).readlines()
+    print (cmd_re_1)
+    if 'HTTP/1.1 200 OK' in str(cmd_re_1):
+        print ("PHP WEB IS FUNCTIONNING")
+    else:
+        print ("PHP WEB IS NOT OK!!!!")
+        os._exit(4)
+
+def remote_check_curl_100(hostname,port):
+    curl_str1="curl -q -I  "
+    curl_url="/php/app/web.php"
+    cmd_line=curl_str1 + hostname + ':' + str(port) + curl_url
+    print ("run cmd is :" , cmd_line)
+    HTTP_CODE_LIST = []
+    HTTP_CODE_200_SUM = 0
+    for i in range(0,100):
+        cmd_re_1=os.popen(cmd_line).readlines()
+        if 'HTTP/1.1 200 OK' in str(cmd_re_1):
+            HTTP_CODE_LIST.append('200')
+        #print (cmd_re_1)    
+    for k in range(0,100):
+        if HTTP_CODE_LIST[k] == '200':
+            HTTP_CODE_200_SUM = HTTP_CODE_200_SUM + 1
+            print(HTTP_CODE_200_SUM)
+    HTTP_CODE_PERCENTAL = (HTTP_CODE_200_SUM / 100) * 100
+    if HTTP_CODE_PERCENTAL < 98:
+        print ("HTTP_CODE_PERCENTAL < 98 NOT ACCEPTABLE AND EXIT")
+        os.exit(98)
+    else:
+        HTTP_CODE_PERCENTAL_RESULT = str(HTTP_CODE_PERCENTAL) + '%'
+        print (HTTP_CODE_PERCENTAL_RESULT)
+        print (hostname)
+        if hostname == "server13":
+            cmd_git_commit="""cd /var/lib/jenkins/workspace/GIT_CODING_TRIGGER/php/; 
+            sudo git checkout master;
+            sudo git pull; 
+            sudo git merge stage; 
+            sudo git push origin master; 
+            sudo git checkout stage"""
+            git_re=os.popen(cmd_git_commit).readlines()
+            print (hostname)
+            print (cmd_git_commit)
+        else:
+            print (hostname)
+            print ('hostname NOT == server13')
+
+hostname=os.getenv('RUN_SERVER_TO_QA')
+print(hostname)
+remote_check(hostname)
+remote_check_php(hostname)
+# remote_check_web(hostname) 
+# remote_check_curl_100(hostname,80)                     
