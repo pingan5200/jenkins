@@ -16,4 +16,5 @@ vim /etc/hosts
 192.168.92.14  server14.example.com  server14  
 192.168.92.134 gitlab.example.com  
 3. 构建gitlab仓库  
+![image](https://github.com/pingan5200/jenkins/blob/master/repo.png)
 
