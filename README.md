@@ -34,6 +34,7 @@ role=LNMP,MYSQL
 ![image](https://github.com/pingan5200/jenkins/blob/master/one-job.png)  
 4.2.2 用执行shell脚本  
 详情见one_job  
+![image](https://github.com/pingan5200/jenkins/blob/master/one-job2.png)  
 
 
 
