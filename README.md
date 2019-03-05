@@ -24,7 +24,8 @@ vim /etc/hosts
 ![image](https://github.com/pingan5200/jenkins/blob/master/puppet-server.png)  
 3.4 php仓库： php开源站点包  
 ![image](https://github.com/pingan5200/jenkins/blob/master/php.png)  
-### 4. 在jenkins上构建任务部署lnmp  
+### 4. 在jenkins上构建第一个任务部署lnmp  
+![image](https://github.com/pingan5200/jenkins/blob/master/one-job.png) 
 
 
 
