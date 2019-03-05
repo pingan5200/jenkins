@@ -24,7 +24,7 @@ vim /etc/hosts
 ![image](https://github.com/pingan5200/jenkins/blob/master/puppet-server.png)  
 3.4 php仓库： php开源站点包  
 ![image](https://github.com/pingan5200/jenkins/blob/master/php.png)  
-### 4. 在jenkins上构建第一个任务部署lnmp  
+### 4. 在jenkins上构建第一个任务start_lnmp部署lnmp  
 4.1 动态参数构建需编辑文件，添加host和role  
 [root@server10 ~]# vim /var/lib/jenkins/workspace/start_lnmp/host.list   
 host=server10,server11,server12,server13  
@@ -38,7 +38,7 @@ role=LNMP,MYSQL
 4.3 start_lnmp任务执行完开始阻塞，执行下游Python_QA_TEST任务,下游任务执行成功，上游才释放结果成功  
 传递环境变量给下游
 ![image](https://github.com/pingan5200/jenkins/blob/master/build_check.png)  
-### 5. 白盒测试lnmp环境是否搭建成功
+### 5. 构建第二个任务Python_QA_TEST白盒测试lnmp环境是否搭建成功
 5.1 python脚本检查lnmp环境  
 接收上游变量  
 ![image](https://github.com/pingan5200/jenkins/blob/master/env_get.png)  
