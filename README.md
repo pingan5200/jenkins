@@ -41,7 +41,7 @@ role=LNMP,MYSQL
 ### 5. 白盒测试lnmp环境是否搭建成功
 5.1 python脚本检查lnmp环境  
 接收上游变量  
-
+![image](https://github.com/pingan5200/jenkins/blob/master/env_get.png)  
 代码详情见python_qa.py  
 
 
