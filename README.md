@@ -1,5 +1,5 @@
 # jenkins持续集成
-## 一、部署LNMP  
+## 一、生产环境直接部署LNMP  
 ### 1. 服务器ip及域名  
 jenkins-server: 192.168.92.10  server10.example.com  
 gitlab-server: 192.168.92.134  gitlab.example.com  
