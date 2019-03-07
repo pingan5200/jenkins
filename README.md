@@ -46,6 +46,11 @@ role=LNMP,MYSQL
 ![image](https://github.com/pingan5200/jenkins/blob/master/python_qa.png)  
 
 ## 二.php代码修改持续集成  
+### 1.创建三个任务
+
+1.1 第一个任务  
+1.2 第二个任务  
+1.3 第三个任务  
 
 
 
