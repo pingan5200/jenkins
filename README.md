@@ -55,8 +55,17 @@ jenkins检查server11，从PHP仓库的 re-1.0分⽀上不断的检查更新 如
 图2  
 ![image](https://github.com/pingan5200/jenkins/blob/master/TRIGGER-2.png)   
 1.2 第二个任务  
-
+DEPLOY_STAGE  这个任务比较简单，部署server11 ，就是把stage机器上的stage分支下的代码更新,然后继续触发下游的测试任务  
+图一
+![image](https://github.com/pingan5200/jenkins/blob/master/DEPLOY-1.png)   
+图二  
+![image](https://github.com/pingan5200/jenkins/blob/master/TRIGGER-2.png)   
 1.3 第三个任务  
+jenkins检查server11测试机stage分支php代码是否满足状态码200 大于98,如果合格，合并master分支  
+图一  
+![image](https://github.com/pingan5200/jenkins/blob/master/python_qa-1.png)   
+图二  
+![image](https://github.com/pingan5200/jenkins/blob/master/python_qa-2.png)   
 
 
 
