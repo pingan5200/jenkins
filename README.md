@@ -66,7 +66,17 @@ jenkins检查server11测试机stage分支php代码是否满足状态码200 大�
 ![image](https://github.com/pingan5200/jenkins/blob/master/python-qa-1.png)   
 图二  
 ![image](https://github.com/pingan5200/jenkins/blob/master/python-qa-2.png)   
-
+## 三.发布测试
+1. server11发布测试前仓库re-1.0分支代码  
+![image](https://github.com/pingan5200/jenkins/blob/master/before_re-1.0.png)   
+2. 运维人员修改re-1.0分支php代码后，如图：  
+![image](https://github.com/pingan5200/jenkins/blob/master/after_re-1.0.png)   
+3. 发布测试  
+发布成功  
+4. server11中master分支代码，已经更新
+[root@server11 php]# cat README.md 
+# PHP
+update php re-1.0 merge master
 
 
 
