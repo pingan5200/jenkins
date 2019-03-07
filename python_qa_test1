@@ -74,10 +74,10 @@ def remote_check_curl_100(hostname, port, stage):
         print(hostname)
         if hostname == "server11":
             cmd_git_commit = """cd /var/lib/jenkins/workspace/GIT_CODING_TRIGGER/php/;
-            sudo git -c http.sslVerify=false pull;
-            sudo git checkout %s;
             sudo git checkout master;
             sudo git merge %s;
+            sudo git add .;
+            sudo git commit -m"haha"
             sudo git -c http.sslVerify=false push origin master;
             """ % (stage, stage)
             get_shell_cmd(cmd_git_commit)
@@ -94,6 +94,9 @@ def get_shell_cmd(cmd):
                             encoding='utf-8')
     try:
         outs, errs = proc.communicate()
+        if errs:
+            print(errs)
+            os._exit(10)
         return outs
     except TimeoutExpired:
         proc.kill()
@@ -105,4 +108,4 @@ hostname = os.getenv('RUN_SERVER_TO_QA')
 print(hostname)
 remote_check(hostname, 80)
 remote_check_web(hostname)
-# remote_check_curl_100(hostname, 80, 're-1.0')
+#remote_check_curl_100(hostname, 80, 're-1.0')
