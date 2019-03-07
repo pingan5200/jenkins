@@ -49,7 +49,13 @@ role=LNMP,MYSQL
 ### 1.创建三个任务
 ![image](https://github.com/pingan5200/jenkins/blob/master/task-2.png)    
 1.1 第一个任务  
+jenkins检查server11，从PHP仓库的 re-1.0分⽀上不断的检查更新 如果发生了更新 那么就继续触发 下游server11的 stage分支更新代码  
+图1  
+![image](https://github.com/pingan5200/jenkins/blob/master/GIT_TRIGGER.png)   
+图2  
+![image](https://github.com/pingan5200/jenkins/blob/master/TRIGGER-2.png)   
 1.2 第二个任务  
+
 1.3 第三个任务  
 
 
