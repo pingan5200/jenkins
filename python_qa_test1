@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+# -*- coding:utf-8 -*-
 
 
 import os
@@ -6,7 +8,7 @@ import subprocess
 
 # 检查nginx，php-fpm, mysqld服务
 def remote_check(hostname, port):
-    cmd_ssh = "ssh" + ' ' + hostname + ' '
+    cmd_ssh = "sudo ssh" + ' ' + hostname + ' '
     cmd_netstat = "netstat -anlput"
     ssh_netstat = cmd_ssh + cmd_netstat
     server_result = get_shell_cmd(ssh_netstat)
@@ -38,9 +40,9 @@ def remote_check(hostname, port):
 
 # 检查php刚部署时的源代码
 def remote_check_web(hostname):
-    cmd_ssh = "ssh" + hostname + ' '
+    cmd_ssh = "sudo ssh" + ' ' + hostname + ' '
     cmd_curl = "curl -q -I -s http://127.0.0.1/php/app/web.php"
-    cmd_grep = "| grep HTTP/1.1 200 OK"
+    cmd_grep = "| grep 'HTTP/1.1 200 OK'"
     ssh_php_web = cmd_ssh + cmd_curl + cmd_grep
     web_result = get_shell_cmd(ssh_php_web)
     if "HTTP/1.1 200 OK" in web_result:
@@ -58,7 +60,7 @@ def remote_check_curl_100(hostname, port, stage):
     print(cmd_line)
     http_status = {}
     http_code = ['200', '404', '304', '301']
-    for i in range(1, 10):
+    for i in range(1, 101):
         curl_code = get_shell_cmd(cmd_line)
         # print(curl_code)
         if curl_code in http_code:
@@ -71,12 +73,13 @@ def remote_check_curl_100(hostname, port, stage):
         print('http_code_percental:', str(http_status['200']) + "%")
         print(hostname)
         if hostname == "server11":
-            cmd_git_commit = f"""cd /var/lib/jenkins/workspace/GIT_CODING_TRIGGER/php/;
-            sudo git checkout master;
+            cmd_git_commit = """cd /var/lib/jenkins/workspace/GIT_CODING_TRIGGER/php/;
             sudo git -c http.sslVerify=false pull;
-            sudo git merge {stage};
+            sudo git checkout %s;
+            sudo git checkout master;
+            sudo git merge %s;
             sudo git -c http.sslVerify=false push origin master;
-            sudo git checkout {stage}"""
+            """ % (stage, stage)
             get_shell_cmd(cmd_git_commit)
             print(cmd_git_commit)
         else:
@@ -88,7 +91,7 @@ def get_shell_cmd(cmd):
     proc = subprocess.Popen(cmd,
                             shell=True,
                             stdout=subprocess.PIPE,
-                            encoding="utf-8")
+                            encoding='utf-8')
     try:
         outs, errs = proc.communicate()
         return outs
@@ -100,6 +103,6 @@ def get_shell_cmd(cmd):
 
 hostname = os.getenv('RUN_SERVER_TO_QA')
 print(hostname)
-remote_check(hostname)
+remote_check(hostname, 80)
 remote_check_web(hostname)
-remote_check_curl_100(hostname, 80, 're-1.0')
+# remote_check_curl_100(hostname, 80, 're-1.0')
