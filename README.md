@@ -73,10 +73,10 @@ jenkins检查server11测试机stage分支php代码是否满足状态码200 大�
 ![image](https://github.com/pingan5200/jenkins/blob/master/after_re-1.0.png)   
 3. 发布测试  
 发布成功  
-4. server11中master分支代码，已经更新
+4. server11中master分支代码，已经更新  
 [root@server11 php]# cat README.md 
-# PHP
-update php re-1.0 merge master
+PHP  
+update php re-1.0 merge master  
 
 
 
