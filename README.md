@@ -42,8 +42,10 @@ role=LNMP,MYSQL
 5.1 python脚本检查lnmp环境  
 接收上游变量  
 ![image](https://github.com/pingan5200/jenkins/blob/master/env_get.png)  
-代码详情见python_qa.py  
+代码详情见python_qa_test1.py  
 ![image](https://github.com/pingan5200/jenkins/blob/master/python_qa.png)  
+
+## 二.php代码修改持续集成  
 
 
 
